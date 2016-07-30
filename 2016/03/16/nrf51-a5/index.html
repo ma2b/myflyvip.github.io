@@ -1,0 +1,720 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Source Demo:
+My Demo:Add a RTC and a Compare to control blinking.
+Please click “more” on the right!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nRF51 Example 5 - RTC and Compare">
+<meta property="og:url" content="http://myfly.vip/2016/03/16/nrf51-a5/index.html">
+<meta property="og:site_name" content="Felix's Blog  宇飞的博客">
+<meta property="og:description" content="Source Demo:
+My Demo:Add a RTC and a Compare to control blinking.
+Please click “more” on the right!">
+<meta property="og:image" content="http://i.imgur.com/LdAIj1p.gif">
+<meta property="og:image" content="http://i.imgur.com/4uRu5yi.gif">
+<meta property="og:image" content="http://i.imgur.com/AO9FQlB.png">
+<meta property="og:updated_time" content="2016-07-29T05:22:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nRF51 Example 5 - RTC and Compare">
+<meta name="twitter:description" content="Source Demo:
+My Demo:Add a RTC and a Compare to control blinking.
+Please click “more” on the right!">
+<meta name="twitter:image" content="http://i.imgur.com/LdAIj1p.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://myfly.vip/2016/03/16/nrf51-a5/"/>
+
+  <title> nRF51 Example 5 - RTC and Compare | Felix's Blog  宇飞的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Felix's Blog  宇飞的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                nRF51 Example 5 - RTC and Compare
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-03-16T17:00:00+08:00" content="2016-03-16">
+              2016-03-16
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Source-Demo"><a href="#Source-Demo" class="headerlink" title="Source Demo:"></a>Source Demo:</h1><p><img src="http://i.imgur.com/LdAIj1p.gif" alt="RT"></p>
+<h1 id="My-Demo"><a href="#My-Demo" class="headerlink" title="My Demo:"></a>My Demo:</h1><p>Add a RTC and a Compare to control blinking.<br><img src="http://i.imgur.com/4uRu5yi.gif" alt="RT"></p>
+<p>Please click “more” on the right!<br><a id="more"></a></p>
+<h1 id="Part-of-my-source-files"><a href="#Part-of-my-source-files" class="headerlink" title="Part of my source files"></a>Part of my source files</h1><h2 id="rtc-c"><a href="#rtc-c" class="headerlink" title="rtc.c"></a>rtc.c</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line">#include &quot;nrf51.h&quot;</div><div class="line">#include &quot;nrf_gpio.h&quot;</div><div class="line">#include &quot;rtc.h&quot;</div><div class="line">#include &quot;led.h&quot;</div><div class="line">#include &lt;stdbool.h&gt;</div><div class="line"></div><div class="line">#define LFCLK_FREQUENCY           (32768UL)                               /**&lt; LFCLK频率为HZ. */</div><div class="line">#define RTC_FREQUENCY             (8UL)                                   /**&lt; 所需的RTC工作时钟 RTC_FREQUENCY 为HZ. */</div><div class="line">#define COMPARE_COUNTERTIME       (1UL)                                   /**&lt; 比较参数值Get Compare event COMPARE_TIME seconds after the counter starts from 0. */</div><div class="line">#define COUNTER_PRESCALER         ((LFCLK_FREQUENCY/RTC_FREQUENCY) - 1)   /* f = LFCLK/(prescaler + 1) */</div><div class="line"></div><div class="line"></div><div class="line">/** @brief 启动内部LFCLK晶振功能</div><div class="line"> */</div><div class="line"> void lfclk_config(void)</div><div class="line">&#123;</div><div class="line">    NRF_CLOCK-&gt;LFCLKSRC             = (CLOCK_LFCLKSRC_SRC_Xtal &lt;&lt; CLOCK_LFCLKSRC_SRC_Pos);//配置低频时钟为外部低频时钟</div><div class="line">    // NRF_CLOCK-&gt;EVENTS_LFCLKSTARTED  = 0;//关掉低频输出</div><div class="line">    // NRF_CLOCK-&gt;EVENTS_HFCLKSTARTED  = 0;//关掉低频输出</div><div class="line">    NRF_CLOCK-&gt;TASKS_LFCLKSTART     = 1;//开始低频输入</div><div class="line">    while (NRF_CLOCK-&gt;EVENTS_LFCLKSTARTED == 0)</div><div class="line">    &#123;</div><div class="line">        //Do nothing.</div><div class="line">    &#125;</div><div class="line">    // NRF_CLOCK-&gt;EVENTS_LFCLKSTARTED = 0;//如果有输出立即关掉</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/** @brief Function for configuring the RTC with TICK to 100Hz and COMPARE0 to 10 sec.</div><div class="line"> */</div><div class="line"> void rtc_config(void)</div><div class="line">&#123;</div><div class="line">    NVIC_EnableIRQ(RTC0_IRQn);                                      // 使能 RTC中断.</div><div class="line">    NRF_RTC0-&gt;PRESCALER     = COUNTER_PRESCALER;                    // 设置预分频值prescaler to a TICK of RTC_FREQUENCY.</div><div class="line">    NRF_RTC0-&gt;CC[0]         = COMPARE_COUNTERTIME * RTC_FREQUENCY;  //比较器频率 Compare0 after approx COMPARE_COUNTERTIME seconds.</div><div class="line"></div><div class="line">    // Enable TICK event and TICK interrupt:</div><div class="line">    NRF_RTC0-&gt;EVTENSET      = RTC_EVTENSET_TICK_Msk;</div><div class="line">    NRF_RTC0-&gt;INTENSET      = RTC_INTENSET_TICK_Msk;</div><div class="line"></div><div class="line">    // Enable COMPARE0 event and COMPARE0 interrupt:</div><div class="line">    NRF_RTC0-&gt;EVTENSET      = RTC_EVTENSET_COMPARE0_Msk;</div><div class="line">    NRF_RTC0-&gt;INTENSET      = RTC_INTENSET_COMPARE0_Msk;</div><div class="line"></div><div class="line"></div><div class="line">    NVIC_EnableIRQ(RTC1_IRQn);                                      // 使能 RTC中断.</div><div class="line">    NRF_RTC1-&gt;PRESCALER     = COUNTER_PRESCALER;                    // 设置预分频值prescaler to a TICK of RTC_FREQUENCY.</div><div class="line">    NRF_RTC1-&gt;CC[1]         = RTC_FREQUENCY;  //比较器频率 Compare0 after approx COMPARE_COUNTERTIME seconds.</div><div class="line"></div><div class="line">    // Enable TICK event and TICK interrupt:</div><div class="line">    NRF_RTC1-&gt;EVTENSET      = RTC_EVTENSET_TICK_Msk;</div><div class="line">    NRF_RTC1-&gt;INTENSET      = RTC_INTENSET_TICK_Msk;</div><div class="line"></div><div class="line">    // Enable COMPARE0 event and COMPARE0 interrupt:</div><div class="line">    NRF_RTC1-&gt;EVTENSET      = RTC_EVTENSET_COMPARE1_Msk;</div><div class="line">    NRF_RTC1-&gt;INTENSET      = RTC_INTENSET_COMPARE1_Msk;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/** @brief: Function for handling the RTC0 interrupts.</div><div class="line"> * Triggered on TICK and COMPARE0 match.触发TICK和比较事件</div><div class="line"> */</div><div class="line">void RTC0_IRQHandler()</div><div class="line">&#123;</div><div class="line">    if ((NRF_RTC0-&gt;EVENTS_TICK != 0) &amp;&amp;</div><div class="line">        ((NRF_RTC0-&gt;INTENSET &amp; RTC_INTENSET_TICK_Msk) != 0))</div><div class="line">    &#123;</div><div class="line">        NRF_RTC0-&gt;EVENTS_TICK = 0;</div><div class="line">        LED_Toggle(LED_1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ((NRF_RTC0-&gt;EVENTS_COMPARE[0] != 0) &amp;&amp;</div><div class="line">        ((NRF_RTC0-&gt;INTENSET &amp; RTC_INTENSET_COMPARE0_Msk) != 0))</div><div class="line">    &#123;</div><div class="line">        NRF_RTC0-&gt;EVENTS_COMPARE[0] = 0;</div><div class="line">        LED_Toggle(LED_2);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void RTC1_IRQHandler()</div><div class="line">&#123;</div><div class="line">    if ((NRF_RTC1-&gt;EVENTS_TICK != 0) &amp;&amp;</div><div class="line">        ((NRF_RTC1-&gt;INTENSET &amp; RTC_INTENSET_TICK_Msk) != 0))</div><div class="line">    &#123;</div><div class="line">        NRF_RTC1-&gt;EVENTS_TICK = 0;</div><div class="line">        LED_Toggle(LED_3);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ((NRF_RTC0-&gt;EVENTS_COMPARE[1] != 0) &amp;&amp;</div><div class="line">        ((NRF_RTC0-&gt;INTENSET &amp; RTC_INTENSET_COMPARE0_Msk) != 0))</div><div class="line">    &#123;</div><div class="line">        NRF_RTC1-&gt;EVENTS_COMPARE[1] = 0;</div><div class="line">        NRF_RTC1-&gt;CC[1] += RTC_FREQUENCY;</div><div class="line">        LED_Toggle(LED_3);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://archive.fabacademy.org/archives/2016/fablabshenzhen/students/426/1download/e5.zip" target="_blank" rel="external">Download my files </a></p>
+<p><img src="http://i.imgur.com/AO9FQlB.png" alt=""><br>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external">Creative Commons Attribution 4.0 International License</a>.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/16/nrf51-a6/" rel="next" title="nRF51 Example 6 - Timer">
+                <i class="fa fa-chevron-left"></i> nRF51 Example 6 - Timer
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/16/nrf51-a4/" rel="prev" title="nRF51 Example 4 - Key and Interrupt">
+                nRF51 Example 4 - Key and Interrupt <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ma yufei(Felix Ma)" />
+          <p class="site-author-name" itemprop="name">Ma yufei(Felix Ma)</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Source-Demo"><span class="nav-number">1.</span> <span class="nav-text">Source Demo:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#My-Demo"><span class="nav-number">2.</span> <span class="nav-text">My Demo:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-of-my-source-files"><span class="nav-number">3.</span> <span class="nav-text">Part of my source files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rtc-c"><span class="nav-number">3.1.</span> <span class="nav-text">rtc.c</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ma yufei(Felix Ma)</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
