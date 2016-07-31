@@ -4,21 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>http://myfly.vip/2016/07/25/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[Finial Project]]></title>
       <url>http://myfly.vip/2016/07/08/SugarFinial/</url>
       <content type="html"><![CDATA[<p><img src="http://i.imgur.com/EwtBSDy.png" alt="slide"><br><a id="more"></a></p>
@@ -108,7 +93,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Week19]]></title>
+      <title><![CDATA[Week19 - Project Development]]></title>
       <url>http://myfly.vip/2016/06/20/Week19/</url>
       <content type="html"><![CDATA[<h1 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h1><p>  complete your final project, tracking your progress:<br><a id="more"></a></p>
 <h2 id="what-tasks-have-been-completed-and-what-tasks-remain"><a href="#what-tasks-have-been-completed-and-what-tasks-remain" class="headerlink" title="what tasks have been completed, and what tasks remain?"></a>what tasks have been completed, and what tasks remain?</h2><pre><code>I have finished the ID design,painting,3D printer,Soldering and Programme
@@ -754,21 +739,6 @@ I&apos;m still working on Wifi connection.
 </li>
 </ul>
 <p><img src="http://i.imgur.com/AO9FQlB.png" alt=""><br>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external">Creative Commons Attribution 4.0 International License</a>.</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Use an Arduino to make my first Fabisp]]></title>
-      <url>http://myfly.vip/2016/02/17/Use-an-Arduino-to-make-my-first-Fabisp/</url>
-      <content type="html"><![CDATA[
-<a id="more"></a>
-
-
-
-
-
-
-<h1 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h1><p><img src="http://i.imgur.com/AO9FQlB.png" alt=""><br>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external">Creative Commons Attribution 4.0 International License</a>.</p>
 ]]></content>
     </entry>
     
